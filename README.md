@@ -14,7 +14,7 @@ This project is a simple **Kanban board application** built using **React.js**, 
 1. **Clone the repository**:
 
     ```bash
-    [git clone https://github.com/your-username/kanban-board.git](https://github.com/alemansrao/Kanban-Board.git)
+    git clone https://github.com/your-username/kanban-board.git
     cd Kanban-Board
     ```
 
