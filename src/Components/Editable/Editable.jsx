@@ -15,7 +15,7 @@ function Editable(props) {
           <input
             className="flex h-1/2 m-2 mb-0 rounded-sm p-1"
             type="text"
-            value={props.text||"Add card"}
+            value={props.text}
             placeholder={props.placeholder}
           />
           <div
