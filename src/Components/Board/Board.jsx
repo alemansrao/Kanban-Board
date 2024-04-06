@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
+import Editable from "../Editable/Editable";
 import { MoreHorizontal } from "react-feather";
 function Board(props) {
   return (
@@ -13,11 +14,7 @@ function Board(props) {
       <div className="board_cards bg-slate-200 flex flex-1 flex-col p-3 gap-4 rounded-md overflow-x-auto no-scrollbar">
         <Card text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, et?0" />
         <Card text="Lorem ipsum, dolor sit amet " />
-        <Card text="consectetur adipisicing elit. Mollitia, et?" />
-        <Card text="consectetur adipisicing elit. Mollitia, et?" />
-        <Card text="consectetur adipisicing elit. Mollitia, et?" />
-        <Card text="consectetur adipisicing elit. Mollitia, et? sicing elit. Mollitia, et?" />
-        <Card text="consectetur adipisicing elit. Mollitia, e Mollitia, et?" />
+        <Editable/>
       </div>
     </div>
   );
