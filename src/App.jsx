@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Board from "./Components/Board/Board";
+import Editable from "./Components/Editable/Editable";
 const App = () => {
   return (
     <div className="App h-screen w-screen flex flex-col ">
@@ -14,6 +15,9 @@ const App = () => {
           <Board title="In Progress" />
           <Board title="Completed" />
           <Board title="Approved" />
+          <div className="add_board w-56 flex flex-col justify-around h-auto gap-7">
+          <Editable displayClass=""/>
+          </div>
         </div>
       </div>
     </div>

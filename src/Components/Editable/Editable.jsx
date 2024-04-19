@@ -13,6 +13,7 @@ function Editable(props) {
           }}
         >
           <input
+          autoFocus
             className="flex h-1/2 m-2 mb-0 rounded-sm p-1"
             type="text"
             value={props.text}
@@ -30,7 +31,7 @@ function Editable(props) {
       ) : (
         <p
           onClick={() => setShowEdit(true)}
-          className={`editable_display cursor-pointer flex w-full h-full items-center justify-center hover:bg-slate-400 hover:rounded-md ${
+          className={`editable_display cursor-pointer flex w-full h-auto items-center justify-center hover:bg-slate-400 hover:rounded-md ${
             props.displayClass || ""
           }}`}
         >
