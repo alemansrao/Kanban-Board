@@ -9,17 +9,17 @@ function Card(props) {
         <div className="card_labels align-middle flex flex-row ">
           <h1 className="px-1 font-mono">{props.card.title}</h1>
         </div>
-        {/* <Chip text="Frontend" />
-        <Chip text="Backend" />
-        <Chip text="Database" />
-        <Chip text="Styling" /> */}
-        {props.card.labels.map((item) => (
-          <Chip key={item.id} text={item.text} color={item.color}/>
+
+        {props.card.labels.map((item, index) => (
+          <Chip key={item.id || index} text={item.text} color={item.color} />
         ))}
+
         <Dropdown
           className="cursor-pointer self-end ml-auto"
           text="Delete Card"
-          removeCard={props.removeCard} cardId={props.card?.id} boardId={props.boardId}
+          removeCard={props.removeCard}
+          cardId={props.card?.id}
+          boardId={props.boardId}
         ></Dropdown>
         {/* <MoreHorizontal className="cursor-pointer self-end ml-auto" /> */}
       </div>

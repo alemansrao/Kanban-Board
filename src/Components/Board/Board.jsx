@@ -12,12 +12,24 @@ function Board(props) {
           {props.board?.title} <span>{`${props.board?.cards?.length}`}</span>
         </p>
         <div className="board_top_more relative z-10 ">
-          <Dropdown text="Delete Board" className="ml-auto" removeBoard={props.onRemoveBoard} boardId={props.board?.id}></Dropdown>
+          <Dropdown
+            text="Delete Board"
+            className="ml-auto"
+            removeBoard={props.onRemoveBoard}
+            boardId={props.board?.id}
+          ></Dropdown>
         </div>
       </div>
       <div className="board_cards bg-slate-200 flex flex-1 flex-col p-3 gap-4 rounded-md overflow-x-auto no-scrollbar">
         {props.board?.cards.map((item) => (
-          <Card key={item.id} text={item.title} card={item} removeCard={props.removeCard} boardId={props.board?.id}/>
+          <Card
+            key={item.id}
+            text={item.title}
+            card={item}
+            removeCard={props.removeCard}
+            boardId={props.board?.id}
+            // onClick={() => console.log("Test")}
+          />
         ))}
 
         {/* <Card text={props.board.cards[0].title} />
@@ -25,10 +37,9 @@ function Board(props) {
 
         <Editable
           text="Add Card"
-          onSubmit={(value)=>props.addCard(value,props.board.id)}
+          onSubmit={(value) => props.addCard(value, props.board.id)}
           boardId={props.board?.id}
         />
-        
       </div>
     </div>
   );
