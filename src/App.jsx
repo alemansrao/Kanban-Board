@@ -153,7 +153,7 @@ const App = () => {
             />
           ))}
 
-          <div className="add_board w-56 flex flex-col justify-around h-auto gap-7">
+          <div className="add_board w-56 flex flex-col justify-around h-auto gap-7 snap-x snap-mandatory snap-center">
             <Editable
               displayClass=""
               text="Add Board"
