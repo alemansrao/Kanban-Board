@@ -1,8 +1,58 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
 import Board from "./Components/Board/Board";
 import Editable from "./Components/Editable/Editable";
+
 const App = () => {
+  const [boards, setBoards] = useState(() => {
+    // Retrieve boards from local storage or initialize it if it doesn't exist
+    const storedBoards = localStorage.getItem('boards');
+    return storedBoards ? JSON.parse(storedBoards) : [
+      {
+        id: Date.now() + Math.random() * 3,
+        title: "To-Do",
+        cards: [
+          {
+            id: Date.now() + Math.random(),
+            title: "Card one",
+            tasks: [],
+            labels: [
+              {
+                text: "frontend",
+                color: "blue",
+              },
+            ],
+            description:
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            date: "Jan 26",
+          },
+          {
+            id: Date.now() + Math.random(),
+            title: "Card two",
+            tasks: [],
+            labels: [
+              {
+                text: "backend",
+                color: "red",
+              },
+              {
+                text: "frontend",
+                color: "blue",
+              },
+            ],
+            description: "ur adipisicing.",
+            date: "July 21",
+          },
+        ],
+      },
+    ];
+  });
+
+  useEffect(() => {
+    // Store boards in local storage whenever it changes
+    localStorage.setItem('boards', JSON.stringify(boards));
+  }, [boards]);
+
   const addCard = (title, board_id) => {
     const months = [
       "Jan",
@@ -67,50 +117,14 @@ const App = () => {
     ]);
   };
 
+  
+
   const removeBoard = (board_id) => {
     const tempBoard = boards.filter((item) => item.id !== board_id);
     setBoards(tempBoard);
   };
 
-  const [boards, setBoards] = useState([
-    {
-      id: Date.now() + Math.random() * 3,
-      title: "To-Do",
-      cards: [
-        {
-          id: Date.now() + Math.random(),
-          title: "Card one",
-          tasks: [],
-          labels: [
-            {
-              text: "frontend",
-              color: "blue",
-            },
-          ],
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-          date: "Jan 26",
-        },
-        {
-          id: Date.now() + Math.random(),
-          title: "Card two",
-          tasks: [],
-          labels: [
-            {
-              text: "backend",
-              color: "red",
-            },
-            {
-              text: "frontend",
-              color: "blue",
-            },
-          ],
-          description: "ur adipisicing.",
-          date: "July 21",
-        },
-      ],
-    },
-  ]);
+  
 
   return (
     <div className="App h-screen w-screen flex flex-col ">
