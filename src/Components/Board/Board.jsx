@@ -8,8 +8,8 @@ function Board(props) {
   return (
     <div className="board flex-col flex gap-7 max-w-96 min-w-96 snap-center">
       <div className="board_top flex gap-3">
-        <p className="board_top_title font-mono flex-1 flex align-middle font-bold">
-          {props.board?.title} <span>{`   ${props.board?.cards?.length}`}</span>
+        <p className="board_top_title font-mono flex-1 flex align-middle font-bold gap-2">
+          {props.board?.title} <span>{`${props.board?.cards?.length}`}</span>
         </p>
         <div className="board_top_more relative z-10 ">
           <Dropdown text="Delete Board" className="ml-auto" removeBoard={props.onRemoveBoard} boardId={props.board?.id}></Dropdown>

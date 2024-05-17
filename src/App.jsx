@@ -4,13 +4,33 @@ import Board from "./Components/Board/Board";
 import Editable from "./Components/Editable/Editable";
 const App = () => {
   const addCard = (title, board_id) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = months[currentDate.getMonth()];
+    const formattedDate = `${day}-${month}`;
+
     const card = {
       id: Date.now() + Math.random() * 2,
       title,
       labels: [],
       tasks: [],
       description: [],
-      date: "",
+      date: formattedDate,
     };
 
     const index = boards.findIndex((item) => item.id === board_id);
@@ -28,9 +48,9 @@ const App = () => {
       (item) => item.id === card_id
     );
     if (cardIndex < 0) return;
-    
+
     console.log("boards[boardIndex]:", boards[boardIndex]);
-    
+
     const tempBoard = [...boards];
     tempBoard[boardIndex].cards.splice(cardIndex, 1);
     setBoards(tempBoard);
@@ -110,7 +130,13 @@ const App = () => {
           <Board title="Completed" />
           <Board title="Approved" /> */}
           {boards.map((item) => (
-            <Board key={item.id} board={item} addCard={addCard} onRemoveBoard={removeBoard} removeCard={removeCard}/>
+            <Board
+              key={item.id}
+              board={item}
+              addCard={addCard}
+              onRemoveBoard={removeBoard}
+              removeCard={removeCard}
+            />
           ))}
 
           <div className="add_board w-56 flex flex-col justify-around h-auto gap-7">
