@@ -44,7 +44,7 @@ const App = () => {
   const removeCard = (card_id, board_id) => {
     const boardIndex = boards.findIndex((item) => item.id === board_id);
     if (boardIndex < 0) return;
-    const cardIndex = boards[boardIndex].findIndex(
+    const cardIndex = boards[boardIndex].cards.findIndex(
       (item) => item.id === card_id
     );
     if (cardIndex < 0) return;
