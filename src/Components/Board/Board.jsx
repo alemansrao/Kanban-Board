@@ -1,28 +1,34 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
 import Editable from "../Editable/Editable";
-import DropdownMenuDemo from "../Dropdown/Dropdown" 
-
+import Dropdown from "../Dropdown/Dropdown";
+import "./board.css";
 function Board(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   return (
     <div className="board flex-col flex gap-7 max-w-96 min-w-96 snap-center">
       <div className="board_top flex gap-3">
         <p className="board_top_title font-mono flex-1 flex align-middle font-bold">
-          {props.title}
-          <span className="px-3">7</span>
+          {props.board?.title} <span>{`   ${props.board?.cards?.length}`}</span>
         </p>
-        <div
-          className="board_top_more relative z-10 "
-        >
-          
-          <DropdownMenuDemo/>
+        <div className="board_top_more relative z-10 ">
+          <Dropdown text="Delete Board" className="ml-auto" removeBoard={props.onRemoveBoard} boardId={props.board?.id}></Dropdown>
         </div>
       </div>
       <div className="board_cards bg-slate-200 flex flex-1 flex-col p-3 gap-4 rounded-md overflow-x-auto no-scrollbar">
-        <Card text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, et?0" />
-        <Card text="Lorem ipsum, dolor sit amet " />
-        <Editable />
+        {props.board?.cards.map((item) => (
+          <Card key={item.id} text={item.title} card={item} removeCard={props.removeCard} boardId={props.board?.id}/>
+        ))}
+
+        {/* <Card text={props.board.cards[0].title} />
+        <Card text="Lorem ipsum, dolor sit amet " /> */}
+
+        <Editable
+          text="Add Card"
+          onSubmit={(value)=>props.addCard(value,props.board.id)}
+          boardId={props.board?.id}
+        />
+        
       </div>
     </div>
   );
