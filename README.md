@@ -4,6 +4,7 @@ This project is a simple **Kanban board application** built using **React.js**, 
 
 ## Features
 
+
 - **Drag-and-drop functionality**: Easily move tasks between different columns (e.g., "To Do," "In Progress," "Done").
 - **Responsive design**: Works seamlessly on various devices and screen sizes.
 - **Task creation and deletion**: Add new tasks and remove completed ones.
