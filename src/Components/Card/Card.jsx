@@ -4,7 +4,12 @@ import Chip from "../Chip/Chip";
 import Dropdown from "../Dropdown/Dropdown";
 function Card(props) {
   return (
-    <div className="card bg-slate-300 rounded-md drop-shadow-lg hover:shadow-lg active:shadow-2xl">
+    <div
+      className="card bg-slate-300 rounded-md drop-shadow-lg hover:shadow-lg active:shadow-2xl"
+      draggable
+      onDragEnd={() => props.handleDragEnd(props.card.id, props.boardId)}
+      onDragEnter={() => props.handleDragEnter(props.card.id, props.boardId)}
+    >
       <div className="card_top flex flex-row items-center min-h-12 gap-y-2 gap-1 px-2 py-1  flex-wrap">
         <div className="card_labels align-middle flex flex-row ">
           <h1 className="px-1 font-mono">{props.card.title}</h1>

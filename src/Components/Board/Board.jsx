@@ -28,6 +28,8 @@ function Board(props) {
             card={item}
             removeCard={props.removeCard}
             boardId={props.board?.id}
+            handleDragEnd={props.handleDragEnd}
+            handleDragEnter={props.handleDragEnter}
             // onClick={() => console.log("Test")}
           />
         ))}
