@@ -194,6 +194,7 @@ const App = () => {
 
           <div className="add_board w-56 flex flex-col justify-around h-auto gap-7 snap-x snap-mandatory snap-center">
             <Editable
+            icon
               displayClass=""
               text="Add Board"
               onSubmit={(value) => {

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import { Check, Plus, X } from "react-feather";
+import { FileMinus, Plus, X } from "react-feather";
 function Editable(props) {
   const [showEdit, setShowEdit] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(!props.icon ? props.text : "");
   return (
-    <div className="Editable  w-full flex justify-around font-mono  min-h-16 flex-row bg-slate-300 rounded-md drop-shadow-lg hover:shadow-lg active:shadow-2xl">
+    <div
+      className={`Editable ${
+        props.icon ? "w-full" : props.compact ? "w-fit" : " "
+      } min-w-24"
+      }  flex justify-around font-mono  min-h-16 flex-row bg-slate-300 rounded-md drop-shadow-lg hover:shadow-lg active:shadow-2xl`}
+    >
       {showEdit ? (
         <form
           className="Editable_edit flex min-h-28 flex-col w-full"
           onSubmit={(event) => {
             event.preventDefault();
-            if (props.onSubmit) props.onSubmit(inputValue,props.boardId);
+            if (props.onSubmit) props.onSubmit(inputValue, props.boardId);
             setShowEdit(false);
-            setInputValue("");
+            props.icon && setInputValue("");
           }}
         >
           <input
@@ -21,7 +26,7 @@ function Editable(props) {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder={props.placeholder}
+            placeholder={props.placeholder ? props.placeholder : ""}
           />
           <div
             className={`editable_edit_footer flex flex-row x-2 justify-between items-center ${
@@ -43,11 +48,11 @@ function Editable(props) {
       ) : (
         <p
           onClick={() => setShowEdit(true)}
-          className={`editable_display cursor-pointer flex w-full h-auto items-center justify-center hover:bg-slate-400 hover:rounded-md ${
+          className={`editable_display px-3 cursor-pointer flex w-full h-auto items-center justify-center hover:bg-slate-400 hover:rounded-md ${
             props.displayClass || ""
           }}`}
         >
-          <Plus /> {props.text || "Add card"}
+          {props.icon && <Plus />} {props.text || "Add card"}
         </p>
       )}
     </div>

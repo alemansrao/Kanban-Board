@@ -38,6 +38,7 @@ function Board(props) {
         <Card text="Lorem ipsum, dolor sit amet " /> */}
 
         <Editable
+          icon
           text="Add Card"
           onSubmit={(value) => props.addCard(value, props.board.id)}
           boardId={props.board?.id}
