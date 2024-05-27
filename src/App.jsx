@@ -130,6 +130,12 @@ const App = () => {
     setTarget({ cid: cardId, bid: boardId });
     console.log("handleDragEnter", cardId, boardId);
   };
+
+  const handleDragEnterEditable = (cardId, boardId) => {
+    setTarget({ cid: cardId, bid: boardId });
+    console.log("handleDragEnter", cardId, boardId);
+  };
+
   const handleDragEnd = (sourceCardId, sourceBoardId) => {
     console.log("handleDragEnd", sourceCardId, sourceBoardId);
     let sourceBoardIndex, targetBoardIndex;
@@ -151,7 +157,7 @@ const App = () => {
     targetCardIndex = boards[targetBoardIndex].cards.findIndex(
       (item) => item.id === target.cid
     );
-    if (targetCardIndex < 0) return;
+    if (targetCardIndex < 0) targetCardIndex = 0; //empty board, new card dropped on it
 
     const tempBoards = [...boards];
     const tempCard = tempBoards[sourceBoardIndex].cards[sourceCardIndex];
@@ -189,12 +195,13 @@ const App = () => {
               removeCard={removeCard}
               handleDragEnd={handleDragEnd}
               handleDragEnter={handleDragEnter}
+              handleDragEnterEditable={handleDragEnterEditable}
             />
           ))}
 
           <div className="add_board w-56 flex flex-col justify-around h-auto gap-7 snap-x snap-mandatory snap-center">
             <Editable
-            icon
+              icon
               displayClass=""
               text="Add Board"
               onSubmit={(value) => {

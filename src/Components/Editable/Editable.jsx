@@ -9,6 +9,7 @@ function Editable(props) {
         props.icon ? "w-full" : props.compact ? "w-fit" : " "
       } min-w-24"
       }  flex justify-around font-mono  min-h-16 flex-row bg-slate-300 rounded-md drop-shadow-lg hover:shadow-lg active:shadow-2xl`}
+      onDragEnter={() => props.handleDragEnterEditable(0, props.boardId)}
     >
       {showEdit ? (
         <form

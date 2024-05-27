@@ -5,6 +5,8 @@ import Dropdown from "../Dropdown/Dropdown";
 import "./board.css";
 function Board(props) {
   const [showDropdown, setShowDropdown] = useState(false);
+  
+
   return (
     <div className="board flex-col flex gap-7 max-w-96 min-w-96 snap-center">
       <div className="board_top flex gap-3">
@@ -42,6 +44,7 @@ function Board(props) {
           text="Add Card"
           onSubmit={(value) => props.addCard(value, props.board.id)}
           boardId={props.board?.id}
+          handleDragEnterEditable={props.handleDragEnterEditable}
         />
       </div>
     </div>
