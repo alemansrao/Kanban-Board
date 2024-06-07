@@ -128,16 +128,13 @@ const App = () => {
 
   const handleDragEnter = (cardId, boardId) => {
     setTarget({ cid: cardId, bid: boardId });
-    console.log("handleDragEnter", cardId, boardId);
   };
 
   const handleDragEnterEditable = (cardId, boardId) => {
     setTarget({ cid: cardId, bid: boardId });
-    console.log("handleDragEnter", cardId, boardId);
   };
 
   const handleDragEnd = (sourceCardId, sourceBoardId) => {
-    console.log("handleDragEnd", sourceCardId, sourceBoardId);
     let sourceBoardIndex, targetBoardIndex;
     let sourceCardIndex, targetCardIndex;
     //source
@@ -157,7 +154,13 @@ const App = () => {
     targetCardIndex = boards[targetBoardIndex].cards.findIndex(
       (item) => item.id === target.cid
     );
-    if (targetCardIndex < 0) targetCardIndex = 0; //empty board, new card dropped on it
+
+    if (targetCardIndex < 0) {
+      if (targetBoardIndex !== sourceBoardIndex) {
+        targetCardIndex = 0; //empty board, new card dropped on it
+      }
+      else return;
+    }
 
     const tempBoards = [...boards];
     const tempCard = tempBoards[sourceBoardIndex].cards[sourceCardIndex];
