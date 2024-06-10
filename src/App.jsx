@@ -17,7 +17,12 @@ const App = () => {
               {
                 id: Date.now() + Math.random(),
                 title: "Card one",
-                tasks: [],
+                tasks: [
+                  {
+                    id: Date.now() + Math.random(),
+                    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+                  },
+                ],
                 labels: [
                   {
                     text: "frontend",
@@ -26,7 +31,7 @@ const App = () => {
                 ],
                 description:
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                date: "Jan 26",
+                date: "Jan 26 2023",
               },
               {
                 id: Date.now() + Math.random(),
@@ -158,8 +163,7 @@ const App = () => {
     if (targetCardIndex < 0) {
       if (targetBoardIndex !== sourceBoardIndex) {
         targetCardIndex = 0; //empty board, new card dropped on it
-      }
-      else return;
+      } else return;
     }
 
     const tempBoards = [...boards];
@@ -171,6 +175,20 @@ const App = () => {
 
     setBoards(tempBoards);
   };
+
+  const updateCard = (cardId,boardId,card)=>{
+    const boardIndex = boards.findIndex((item) => item.id === boardId);
+    if (boardIndex < 0) return;
+    const cardIndex = boards[boardIndex].cards.findIndex(
+      (item) => item.id === cardId
+    );
+    if (cardIndex < 0) return;
+
+
+    const tempBoard = [...boards]
+    tempBoard[boardId].cards[cardId] = card //new card which is sent from cardinfo modal
+    setBoards(tempBoard)
+  }
 
   return (
     <div className="App h-screen w-screen flex flex-col ">
@@ -199,6 +217,7 @@ const App = () => {
               handleDragEnd={handleDragEnd}
               handleDragEnter={handleDragEnter}
               handleDragEnterEditable={handleDragEnterEditable}
+              updateCard={updateCard}
             />
           ))}
 
