@@ -9,7 +9,7 @@ function Chip(props) {
       {props.close && (
         <X
           className="max-h-4 cursor-pointer"
-          onClick={props.onClose ? props.onClose() : void 0}
+          onClick={()=>props.onClose ? props.onClose() : void 0}
         />
       )}
     </div>
