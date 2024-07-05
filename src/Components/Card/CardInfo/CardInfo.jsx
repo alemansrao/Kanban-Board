@@ -34,14 +34,15 @@ function CardInfo(props) {
     };
     setValues({ ...values, labels: [...values.labels, label] });
   };
-
-  // Check if the label exists in the values.labels array
-  // If it exists, remove the label with the provided text from the values.labels array
+  
+// Remove a label from the values.labels array if it matches the provided text
   const removeLabel = (text) => {
-    const index = values.labels?.findIndex((item) => item.text === text);
-    if (index < 0) return;
-    setValues({ ...values, labels: values.labels.splice(index, 1) });
-  };
+  const index = values.labels?.findIndex((item) => item.text === text);
+  if (index < 0) return;
+  const updatedLabels = [...values.labels];
+  updatedLabels.splice(index, 1);
+  setValues({ ...values, labels: updatedLabels });
+};
 
   useEffect(() => {
     props.updateCard(props.card.id, props.boardId, values);

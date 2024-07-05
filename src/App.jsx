@@ -6,7 +6,7 @@ import Editable from "./Components/Editable/Editable";
 const App = () => {
   const [boards, setBoards] = useState(() => {
     // Retrieve boards from local storage or initialize it if it doesn't exist
-    const storedBoards = localStorage.getItem("boards#");
+    const storedBoards = localStorage.getItem("boards");
     return storedBoards
       ? JSON.parse(storedBoards)
       : [
