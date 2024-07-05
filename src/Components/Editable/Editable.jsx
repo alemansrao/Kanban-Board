@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FileMinus, Plus, X } from "react-feather";
 function Editable(props) {
   const [showEdit, setShowEdit] = useState(false);
   const [inputValue, setInputValue] = useState(!props.icon ? props.text : "");
+
+
+
+
   return (
     <div
       className={`Editable ${

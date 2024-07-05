@@ -9,13 +9,13 @@ function Card(props) {
     <>
       {showModal && (
         <CardInfo
-        updateCard={props.updateCard}
-        boardId={props.boardId}
-          card={props.card}
           onClose={() => setShowModal(false)}
-          cardTitle={props.card.title}
-          cardDescription={props.card.description}
-          cardLabels={props.card.labels}
+          // cardTitle={props.card.title}
+          // cardDescription={props.card.description}
+          // cardLabels={props.card.labels}
+          card={props.card}
+          boardId={props.boardId}
+          updateCard={props.updateCard}
         />
       )}
 
@@ -32,7 +32,7 @@ function Card(props) {
           </div>
 
           {props.card.labels.map((item, index) => (
-            <Chip key={item.id || index} text={item.text} color={item.color}/>
+            <Chip key={item.id || index} text={item.text} color={item.color} />
           ))}
 
           <Dropdown
@@ -51,12 +51,7 @@ function Card(props) {
         </div>
         <div className="card_footer flex justify-between px-2 py-1 flex-row">
           <p className="flex font-mono flex-row items-center">
-            {/* get date in Feb 25 format */}
-            <Calendar className="mr-1" />{" "}
-            {new Date(props.card.date).toLocaleDateString(undefined, {
-              day: "numeric",
-              month: "short",
-            })}
+            <Calendar className="mr-1" /> {props.card.date}
           </p>
           <p className="flex font-mono flex-row items-center">
             <CheckSquare className="mr-1" />

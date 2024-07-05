@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../../Modal/Modal";
 import { Type, List, Calendar, Tag, Trash, CheckSquare } from "react-feather";
 import Editable from "../../Editable/Editable";
@@ -15,7 +15,7 @@ function CardInfo(props) {
   ];
 
   const [activeColor, setActiveColor] = useState("");
-  const [values,setValues] = useState({...props.card}) //makes copy of the card
+  const [values, setValues] = useState({ ...props.card }); //makes copy of the card
   const { title, description, date, tasks, labels } = props.card;
 
   const calculatePercentage = () => {
@@ -24,6 +24,28 @@ function CardInfo(props) {
     return Math.round((completedTasks / tasks.length) * 100) + "";
   };
 
+  // Check if the label already exists in the values.labels array
+  // If it doesn't exist, add a new label with the provided value to the values.labels array
+  const addLabel = (value) => {
+    const index = values.labels?.findIndex((item) => item.text === value);
+    if (index >= 0) return;
+    const label = {
+      text: value,
+    };
+    setValues({ ...values, labels: [...values.labels, label] });
+  };
+
+  // Check if the label exists in the values.labels array
+  // If it exists, remove the label with the provided text from the values.labels array
+  const removeLabel = (text) => {
+    const index = values.labels?.findIndex((item) => item.text === text);
+    if (index < 0) return;
+    setValues({ ...values, labels: values.labels.splice(index, 1) });
+  };
+
+  useEffect(() => {
+    props.updateCard(props.card.id, props.boardId, values);
+  }, [values]);
 
   return (
     <Modal onClose={() => (props.onClose ? props.onClose() : "")}>
@@ -38,6 +60,7 @@ function CardInfo(props) {
             placeholder="Enter Title"
             buttonText="Save"
             compact
+            onSubmit={(value) => setValues({ ...values, title: value })}
           />
         </div>
         <div className="cardiinfo_box flex flex-col gap-1">
@@ -49,6 +72,7 @@ function CardInfo(props) {
             text={values.description}
             placeholder="Enter Description"
             buttonText="Save"
+            onSubmit={(value) => setValues({ ...values, description: value })}
           />
         </div>
         <div className="cardiinfo_box flex flex-col gap-1">
@@ -57,13 +81,26 @@ function CardInfo(props) {
             Date
           </div>
           <input
+            className="border-2 w-fit min-w-72 border-solid outline-none rounded-md h-10 p-1"
             type="date"
             name=""
             id=""
             defaultValue={
-              date ? new Date(values.date).toISOString().split("T")[0] : ""
+              values.date
+                ? (() => {
+                    const date = new Date(values.date);
+                    const timezoneOffsetInMilliseconds =
+                      date.getTimezoneOffset() * 60000;
+                    const adjustedDate = new Date(
+                      date.getTime() - timezoneOffsetInMilliseconds
+                    );
+                    return adjustedDate.toISOString().split("T")[0];
+                  })()
+                : ""
             }
-            className="border-2 w-fit min-w-72 border-solid outline-none rounded-md h-10 p-1"
+            onChange={(event) =>
+              setValues({ ...values, date: event.target.value })
+            }
           />
         </div>
         <div className="cardiinfo_box flex flex-col gap-2">
@@ -75,16 +112,13 @@ function CardInfo(props) {
             {values.labels?.map((item, index) => (
               <Chip
                 text={item.text}
-                color={item.color}
                 close
-                onClose={() => {
-                  console.log("close");
-                }}
+                onClose={() => removeLabel(item.text)}
                 key={item.text + index}
               />
             ))}
           </div>
-          <div className="card_info_box_colors flex gap-4 items-center">
+          {/* <div className="card_info_box_colors flex gap-4 items-center">
             <ul className="flex gap-3">
               {colors.map((item, index) => (
                 <li
@@ -97,13 +131,14 @@ function CardInfo(props) {
                 ></li>
               ))}
             </ul>
-          </div>
+          </div> */}
           <div className="card_info_box_body">
             <Editable
               text="Add label"
               placeholder="Enter Label"
               buttonText="Save"
-              compact
+              icon
+              onSubmit={(value) => addLabel(value)}
             />
           </div>
         </div>

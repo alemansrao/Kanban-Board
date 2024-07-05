@@ -6,7 +6,7 @@ import Editable from "./Components/Editable/Editable";
 const App = () => {
   const [boards, setBoards] = useState(() => {
     // Retrieve boards from local storage or initialize it if it doesn't exist
-    const storedBoards = localStorage.getItem("boards");
+    const storedBoards = localStorage.getItem("boards#");
     return storedBoards
       ? JSON.parse(storedBoards)
       : [
@@ -17,38 +17,19 @@ const App = () => {
               {
                 id: Date.now() + Math.random(),
                 title: "Card one",
-                tasks: [
-                  {
-                    id: Date.now() + Math.random(),
-                    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                  },
-                ],
-                labels: [
-                  {
-                    text: "frontend",
-                    color: "blue",
-                  },
-                ],
+                tasks: [],
+                labels: [{ text: "backend" }, { text: "frontend" }],
                 description:
                   "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                date: "Jan 26 2023",
+                date: "2023 01 31",
               },
               {
                 id: Date.now() + Math.random(),
                 title: "Card two",
                 tasks: [],
-                labels: [
-                  {
-                    text: "backend",
-                    color: "red",
-                  },
-                  {
-                    text: "frontend",
-                    color: "blue",
-                  },
-                ],
+                labels: [{ text: "backend" }, { text: "frontend" }],
                 description: "ur adipisicing.",
-                date: "July 21",
+                date: "2024 09 17",
               },
             ],
           },
@@ -175,21 +156,18 @@ const App = () => {
 
     setBoards(tempBoards);
   };
-
-  const updateCard = (cardId,boardId,card)=>{
-    const boardIndex = boards.findIndex((item) => item.id === boardId);
+  const updateCard = (card_id, board_id, card) => {
+    const boardIndex = boards.findIndex((item) => item.id === board_id);
     if (boardIndex < 0) return;
     const cardIndex = boards[boardIndex].cards.findIndex(
-      (item) => item.id === cardId
+      (item) => item.id === card_id
     );
     if (cardIndex < 0) return;
 
-
-    const tempBoard = [...boards]
-    tempBoard[boardId].cards[cardId] = card //new card which is sent from cardinfo modal
-    setBoards(tempBoard)
-  }
-
+    const tempBoard = [...boards];
+    tempBoard[boardIndex].cards[cardIndex] = card;
+    setBoards(tempBoard);
+  };
   return (
     <div className="App h-screen w-screen flex flex-col ">
       <div className="app_navbar flex w-full p-5 border-4 border-solid justify-between">
