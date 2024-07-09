@@ -61,8 +61,9 @@ const App = () => {
 
     const currentDate = new Date();
     const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
     const month = months[currentDate.getMonth()];
-    const formattedDate = `${day}-${month}`;
+    const formattedDate = `${day}-${month}-${year}`;
 
     const card = {
       id: Date.now() + Math.random() * 2,

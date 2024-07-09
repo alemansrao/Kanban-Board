@@ -53,10 +53,14 @@ function Card(props) {
           <p className="flex font-mono flex-row items-center">
             <Calendar className="mr-1" /> {props.card.date}
           </p>
-          <p className="flex font-mono flex-row items-center">
-            <CheckSquare className="mr-1" />
-            1/4
-          </p>
+          {props.card.tasks.length > 0 && (
+            <p className="flex font-mono flex-row items-center">
+              <CheckSquare className="mr-1" />
+              {
+                props.card?.tasks?.filter((item) => item.isCompleted).length
+              } / {props.card?.tasks?.length}
+            </p>
+          )}
         </div>
       </div>
     </>

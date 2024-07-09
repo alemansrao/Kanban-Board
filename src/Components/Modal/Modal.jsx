@@ -6,7 +6,7 @@ function Modal(props) {
       onClick={() => (props.onClose ? props.onClose() : "")}
     >
       <div
-        className="modal_content bg-white rounded-md p-4 max-h-[95vh] overflow-y-auto no-scrollbar"
+        className="modal_content bg-white rounded-md p-4 max-h-[95vh] overflow-y-auto no-scrollbar md:min-w-[50vw]"
         onClick={(event) => event.stopPropagation()}
       >
         {props.children}
