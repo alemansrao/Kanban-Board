@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../Modal/Modal";
+import { Edit, X } from "react-feather";
 import { Type, List, Calendar, Tag, Trash, CheckSquare } from "react-feather";
 import Editable from "../../Editable/Editable";
 import Chip from "../../Chip/Chip";
 function CardInfo(props) {
-  const colors = [
-    "#FF0000",
-    "#FF7F00",
-    "#FFFF00",
-    "#00FF00",
-    "#3b82f6",
-    "#4B0082",
-    "#8B00FF",
-  ];
-
-  const [activeColor, setActiveColor] = useState("");
   const [values, setValues] = useState({ ...props.card }); //makes copy of the card
   const { title, description, date, tasks, labels } = props.card;
 
@@ -75,6 +65,11 @@ function CardInfo(props) {
   return (
     <Modal onClose={() => (props.onClose ? props.onClose() : "")}>
       <div className="cardinfo p-3 bg-white flex flex-col gap-5 max-h-[85vh]  ">
+        <div className="heading flex flex-row gap-2">
+          <Edit className="flex text-xl" />
+          <h1 className="text-2xl font-bold flex">Edit Card</h1>
+          <X className="flex ml-auto cursor-pointer" onClick={() => (props.onClose ? props.onClose() : "")} />
+        </div>
         <div className="cardiinfo_box flex flex-col gap-1">
           <div className="cardinfo_box_title font-bold text-l gap-2 flex">
             <Type />
