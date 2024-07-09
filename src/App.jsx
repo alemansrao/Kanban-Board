@@ -56,7 +56,7 @@ const App = () => {
       title,
       labels: [],
       tasks: [],
-      description: [],
+      description: "Add a description",
       date: formattedDate,
     };
 

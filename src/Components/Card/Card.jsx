@@ -44,11 +44,13 @@ function Card(props) {
           ></Dropdown>
           {/* <MoreHorizontal className="cursor-pointer self-end ml-auto" /> */}
         </div>
-        <div className="card_title bg-gray-200 mx-2 rounded-sm p-1">
+        {props.card?.description && (
+          <div className="card_title bg-gray-200 mx-2 rounded-sm p-1">
           <h1 className="card_title_text font-mono">
             {props.card.description}
           </h1>
         </div>
+        )}
         <div className="card_footer flex justify-between px-2 py-1 flex-row">
           <p className="flex font-mono flex-row items-center">
             <Calendar className="mr-1" /> {props.card.date}

@@ -94,6 +94,7 @@ function CardInfo(props) {
             Description
           </div>
           <Editable
+            icon
             text={values.description}
             placeholder="Enter Description"
             buttonText="Save"
