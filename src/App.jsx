@@ -9,13 +9,25 @@ const App = () => {
     const storedBoards = localStorage.getItem("boards");
     return storedBoards ? JSON.parse(storedBoards) : [];
   });
-
+  const [latestBoardId, setLatestBoardId] = useState(null);
   const [target, setTarget] = useState({ cid: "", bid: "" });
 
   useEffect(() => {
     // Store boards in local storage whenever it changes
     localStorage.setItem("boards", JSON.stringify(boards));
   }, [boards]);
+
+  useEffect(() => {
+    if (latestBoardId !== null) {
+      const newBoardElement = document.getElementById(latestBoardId);
+      if (newBoardElement) {
+        newBoardElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [latestBoardId]);
 
   const addCard = (title, board_id) => {
     const months = [
@@ -72,14 +84,17 @@ const App = () => {
   };
 
   const addBoard = (title) => {
+    const newId = Date.now() + Math.random();
     setBoards([
       ...boards,
       {
-        id: Date.now() + Math.random(),
+        id: newId,
         title,
         cards: [],
       },
     ]);
+
+    setLatestBoardId(newId);
   };
 
   const removeBoard = (board_id) => {

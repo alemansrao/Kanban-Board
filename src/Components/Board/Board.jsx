@@ -8,7 +8,7 @@ function Board(props) {
   
 
   return (
-    <div className="board flex-col flex gap-7 max-w-96 min-w-96 snap-center">
+    <div className="board flex-col flex gap-7 max-w-96 min-w-96 snap-center" id={props.board.id}>
       <div className="board_top flex gap-3">
         <p className="board_top_title font-mono flex-1 flex align-middle font-bold gap-2">
           {props.board?.title} <span>{`${props.board?.cards?.length}`}</span>
