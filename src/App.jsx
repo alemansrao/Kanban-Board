@@ -7,33 +7,7 @@ const App = () => {
   const [boards, setBoards] = useState(() => {
     // Retrieve boards from local storage or initialize it if it doesn't exist
     const storedBoards = localStorage.getItem("boards");
-    return storedBoards
-      ? JSON.parse(storedBoards)
-      : [
-          {
-            id: Date.now() + Math.random() * 3,
-            title: "To-Do",
-            cards: [
-              {
-                id: Date.now() + Math.random(),
-                title: "Card one",
-                tasks: [],
-                labels: [{ text: "backend" }, { text: "frontend" }],
-                description:
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-                date: "2023 01 31",
-              },
-              {
-                id: Date.now() + Math.random(),
-                title: "Card two",
-                tasks: [],
-                labels: [{ text: "backend" }, { text: "frontend" }],
-                description: "ur adipisicing.",
-                date: "2024 09 17",
-              },
-            ],
-          },
-        ];
+    return storedBoards ? JSON.parse(storedBoards) : [];
   });
 
   const [target, setTarget] = useState({ cid: "", bid: "" });
