@@ -17,17 +17,17 @@ const App = () => {
     localStorage.setItem("boards", JSON.stringify(boards));
   }, [boards]);
 
-  useEffect(() => {
-    if (latestBoardId !== null) {
-      const newBoardElement = document.getElementById(latestBoardId);
-      if (newBoardElement) {
-        newBoardElement.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }
+useEffect(() => {
+  if (latestBoardId !== null && window.innerWidth <= 768) { // Adjust the width value as needed
+    const newBoardElement = document.getElementById(latestBoardId);
+    if (newBoardElement) {
+      newBoardElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
     }
-  }, [latestBoardId]);
+  }
+}, [latestBoardId]);
 
   const addCard = (title, board_id) => {
     const months = [
